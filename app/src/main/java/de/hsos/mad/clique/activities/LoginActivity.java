@@ -18,4 +18,9 @@ public class LoginActivity extends AppCompatActivity {
     public void navigateToRegisterActivity(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
     }
+
+    public void navigateToShowCliquesActivity(View view) {
+        //First check if the user has permissions to use this app @DB...
+        startActivity(new Intent(this, ShowCliquesActivity.class));
+    }
 }

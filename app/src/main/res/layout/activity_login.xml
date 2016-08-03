@@ -37,7 +37,8 @@
         android:id="@+id/loginButton"
         android:layout_marginTop="36dp"
         android:layout_below="@+id/loginPassword"
-        android:layout_alignStart="@+id/loginPassword" />
+        android:layout_alignStart="@+id/loginPassword"
+        android:onClick="navigateToShowCliquesActivity"/>
 
     <Button
         android:layout_width="wrap_content"

@@ -11,4 +11,5 @@
     <string name="register_repeatpassword_placeholder">Passwort wiederholen&#8230;</string>
     <string name="register_backbutton">Zurück</string>
     <string name="register_executeregistration">Registrieren</string>
+    <string name="title_activity_show_cliques">ShowCliquesActivity</string>
 </resources>
