@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Clique</string>
+    <string name="login_username_placeholder">Benutzername&#8230;</string>
+    <string name="login_password_placeholder">Passwort&#8230;</string>
+    <string name="login_loginbutton_placeholder">Anmelden</string>
+    <string name="login_registerbutton_placeholder">Registrieren</string>
+    <string name="register_name_placeholder">Vorname&#8230;</string>
+    <string name="register_surname_placeholder">Nachname&#8230;</string>
+    <string name="register_email_placeholder">E-Mail&#8230;</string>
+    <string name="register_password_placeholder">Passwort&#8230;</string>
+    <string name="register_repeatpassword_placeholder">Passwort wiederholen&#8230;</string>
+    <string name="register_backbutton">Zurück</string>
+    <string name="register_executeregistration">Registrieren</string>
 </resources>
