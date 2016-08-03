@@ -1,9 +1,11 @@
-package de.hsos.mad.clique;
+package de.hsos.mad.clique.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import de.hsos.mad.clique.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

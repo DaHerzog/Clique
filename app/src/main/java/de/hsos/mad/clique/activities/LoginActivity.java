@@ -1,10 +1,11 @@
-package de.hsos.mad.clique;
+package de.hsos.mad.clique.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
+
+import de.hsos.mad.clique.R;
 
 public class LoginActivity extends AppCompatActivity {
 
