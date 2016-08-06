@@ -5,20 +5,10 @@ package de.hsos.mad.clique.models;
  */
 public class Clique {
 
-    private int id;
     private String name;
 
-    public Clique(int pId, String pName) {
-        this.id = pId;
+    public Clique(String pName) {
         this.name = pName;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int pId) {
-        this.id = pId;
     }
 
     public String getName() {

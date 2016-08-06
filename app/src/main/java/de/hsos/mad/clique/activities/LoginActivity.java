@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import de.hsos.mad.clique.R;
+import de.hsos.mad.clique.controller.UserController;
+import de.hsos.mad.clique.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void navigateToShowCliquesActivity(View view) {
         //First check if the user has permissions to use this app @DB...
+        UserController.getInstance().setActualUser(new User("Peter", "Mustermann"));
         startActivity(new Intent(this, ShowCliquesActivity.class));
     }
 }
