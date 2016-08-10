@@ -1,19 +1,28 @@
 package de.hsos.mad.clique.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.adapter.CliquesAdapter;
-import de.hsos.mad.clique.controller.CliquenController;
+import de.hsos.mad.clique.controller.UserController;
+import de.hsos.mad.clique.repositories.CliquenRepository;
 
 public class ShowCliquesActivity extends AppCompatActivity {
+
+    CliquesAdapter cliquesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +37,8 @@ public class ShowCliquesActivity extends AppCompatActivity {
         myLlm.setOrientation(LinearLayoutManager.VERTICAL);
         cliqueList.setLayoutManager(myLlm);
         //set the adapter
-        RecyclerView.Adapter listAdapter = new CliquesAdapter();
-        cliqueList.setAdapter(listAdapter);
+        this.cliquesAdapter = new CliquesAdapter();
+        cliqueList.setAdapter(this.cliquesAdapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,8 +47,7 @@ public class ShowCliquesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Neue Activity für neue Clique
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

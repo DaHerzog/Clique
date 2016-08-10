@@ -156,11 +156,11 @@ public class ShowEventsActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Zugesagt";
                 case 1:
-                    return "SECTION 2";
+                    return "Offen";
                 case 2:
-                    return "SECTION 3";
+                    return "Abgesagt";
             }
             return null;
         }

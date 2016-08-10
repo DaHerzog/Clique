@@ -7,6 +7,7 @@ public class Clique {
 
     private int id;
     private String name;
+    private String creator;
 
     public Clique(int pId, String pName) {
         this.id = pId;
@@ -27,5 +28,13 @@ public class Clique {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

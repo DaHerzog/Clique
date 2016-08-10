@@ -43,6 +43,7 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
             return cliqueId;
         }
 
+        @Override
         public void onClick(View v) {
             //Log.w("Clique custom Log", String.valueOf(this.getCliqueId()));
             Intent goToEvents = new Intent(v.getContext(), ShowEventsActivity.class);
@@ -78,5 +79,13 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
     @Override
     public int getItemCount() {
         return mUsersCliques.length;
+    }
+
+    public Clique[] getmUsersCliques() {
+        return mUsersCliques;
+    }
+
+    public void setmUsersCliques(Clique[] mUsersCliques) {
+        this.mUsersCliques = mUsersCliques;
     }
 }
