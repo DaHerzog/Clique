@@ -15,16 +15,16 @@ public class CliquenRepository {
 
     private CliquenRepository() {
         this.mockedCliques = new ArrayList<Clique>();
-        this.mockedCliques.add(new Clique(1, "Keksparty"));
-        this.mockedCliques.add(new Clique(2, "Blubb"));
-        this.mockedCliques.add(new Clique(3, "Grillen"));
-        this.mockedCliques.add(new Clique(4, "Nope"));
-        this.mockedCliques.add(new Clique(5, "Großes Nope"));
-        this.mockedCliques.add(new Clique(6, "hmmmm...."));
-        this.mockedCliques.add(new Clique(7, "Keksparty1"));
-        this.mockedCliques.add(new Clique(8, "Keksparty2"));
-        this.mockedCliques.add(new Clique(9, "Keksparty3"));
-        this.mockedCliques.add(new Clique(10, "Keksparty4"));
+        this.mockedCliques.add(new Clique("Keksparty", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Blubb", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Grillen", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Nope", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Großes Nope", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("hmmmm....", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Keksparty1", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Keksparty2", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Keksparty3", "peter", "wilder haufen"));
+        this.mockedCliques.add(new Clique("Keksparty4", "peter", "wilder haufen"));
     }
 
     public static CliquenRepository getInstance() {
@@ -41,10 +41,10 @@ public class CliquenRepository {
         return returnArray;
     }
 
-    public void addNewClique(String name) {
+    public void addNewClique(Clique pClique) {
         //RESTful Request here...
-        int newId = this.mockedCliques.get(this.mockedCliques.size()-1).getId()+1;
-        this.mockedCliques.add(new Clique(newId, name));
+        pClique.setId(this.mockedCliques.get(this.mockedCliques.size()-1).getId()+1);
+        this.mockedCliques.add(pClique);
 
         //The selection of the id should happen on the server. But we need the id of the clique for
         //the events!

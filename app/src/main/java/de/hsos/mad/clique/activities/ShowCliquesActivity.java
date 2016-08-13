@@ -1,6 +1,7 @@
 package de.hsos.mad.clique.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +18,13 @@ import android.widget.EditText;
 
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.adapter.CliquesAdapter;
+import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.UserController;
 import de.hsos.mad.clique.repositories.CliquenRepository;
 
 public class ShowCliquesActivity extends AppCompatActivity {
+
+    static final int CREATE_CLIQUE_REQUEST = 1;
 
     CliquesAdapter cliquesAdapter;
 
@@ -47,10 +51,25 @@ public class ShowCliquesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Neue Activity für neue Clique
+                Intent createCliqueIntent = new Intent(view.getContext(), CreateNewClique.class);
+                startActivityForResult(createCliqueIntent, CREATE_CLIQUE_REQUEST);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CREATE_CLIQUE_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String cliqueName = data.getStringExtra("clique_name");
+                String cliqueDescription = data.getStringExtra("clique_description");
+                CliquenController.getInstance().addNewClique(cliqueName, cliqueDescription);
+                this.cliquesAdapter.getActualCliques();
+                this.cliquesAdapter.notifyDataSetChanged();
+            } else if (resultCode == RESULT_CANCELED) {
+                Log.w("DEBUG", "User canceled");
+            }
+        }
+    }
 }

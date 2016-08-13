@@ -8,10 +8,13 @@ public class Clique {
     private int id;
     private String name;
     private String creator;
+    private String description;
 
-    public Clique(int pId, String pName) {
-        this.id = pId;
+    public Clique(String pName, String pCreator, String pDesc) {
+        this.id = 0;
         this.name = pName;
+        this.creator = pCreator;
+        this.description = pDesc;
     }
 
     public String getName() {
@@ -36,5 +39,13 @@ public class Clique {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

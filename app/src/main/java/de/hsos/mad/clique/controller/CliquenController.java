@@ -26,8 +26,8 @@ public class CliquenController {
         return CliquenRepository.getInstance().getCliquesForUserId(pUser.getId());
     }
 
-    public void addNewClique(String name) {
-        CliquenRepository.getInstance().addNewClique(name);
+    public void addNewClique(String name, String description) {
+        CliquenRepository.getInstance().addNewClique(new Clique(name, UserController.getInstance().getActualUser().getmName(), description));
     }
 
 }

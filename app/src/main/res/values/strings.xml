@@ -15,4 +15,7 @@
     <string name="title_activity_show_events">Deine Events</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="new_clique_caption_one">Wie soll deine Clique heißen?</string>
+    <string name="new_clique_caption_two">Gebe eine kurze Beschreibung an!</string>
+    <string name="new_clique_button">Erstellen</string>
 </resources>

@@ -88,4 +88,8 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
     public void setmUsersCliques(Clique[] mUsersCliques) {
         this.mUsersCliques = mUsersCliques;
     }
+
+    public void getActualCliques() {
+        this.mUsersCliques = CliquenController.getInstance().getCliquesPerUser(UserController.getInstance().getActualUser());
+    }
 }
