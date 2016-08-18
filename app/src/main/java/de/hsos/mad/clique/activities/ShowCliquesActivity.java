@@ -26,7 +26,7 @@ public class ShowCliquesActivity extends AppCompatActivity {
 
     static final int CREATE_CLIQUE_REQUEST = 1;
 
-    CliquesAdapter cliquesAdapter;
+    private CliquesAdapter cliquesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

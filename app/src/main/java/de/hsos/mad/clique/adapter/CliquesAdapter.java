@@ -25,7 +25,7 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected TextView mCliqueName;
-        protected int cliqueId;
+        protected Clique clique;
         protected CardView cardView;
 
         public ViewHolder(View v) {
@@ -35,19 +35,18 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
             this.cardView.setOnClickListener(this);
         }
 
-        public void setCliqueId(int pCliqueId) {
-            this.cliqueId = pCliqueId;
+        public Clique getClique() {
+            return clique;
         }
 
-        public int getCliqueId() {
-            return cliqueId;
+        public void setClique(Clique clique) {
+            this.clique = clique;
         }
 
         @Override
         public void onClick(View v) {
-            //Log.w("Clique custom Log", String.valueOf(this.getCliqueId()));
             Intent goToEvents = new Intent(v.getContext(), ShowEventsActivity.class);
-            goToEvents.putExtra("Clique_Id", this.getCliqueId());
+            CliquenController.getInstance().setCurrentlySelectedClique(this.clique);
             v.getContext().startActivity(goToEvents);
         }
 
@@ -73,7 +72,7 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Clique currClique = mUsersCliques[position];
         holder.mCliqueName.setText(currClique.getName());
-        holder.setCliqueId(mUsersCliques[position].getId());
+        holder.setClique(mUsersCliques[position]);
     }
 
     @Override

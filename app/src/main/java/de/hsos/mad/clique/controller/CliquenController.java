@@ -1,5 +1,7 @@
 package de.hsos.mad.clique.controller;
 
+import java.util.List;
+
 import de.hsos.mad.clique.models.Clique;
 import de.hsos.mad.clique.models.User;
 import de.hsos.mad.clique.repositories.CliquenRepository;
@@ -10,6 +12,10 @@ import de.hsos.mad.clique.repositories.CliquenRepository;
 public class CliquenController {
 
     private static CliquenController instance = null;
+
+    private List<Clique> usersCliques;
+
+    private Clique currentlySelectedClique;
 
     private CliquenController() {
 
@@ -27,7 +33,22 @@ public class CliquenController {
     }
 
     public void addNewClique(String name, String description) {
-        CliquenRepository.getInstance().addNewClique(new Clique(name, UserController.getInstance().getActualUser().getmName(), description));
+        CliquenRepository.getInstance().addNewClique(name, description);
     }
 
+    public List<Clique> getUsersCliques() {
+        return usersCliques;
+    }
+
+    public void setUsersCliques(List<Clique> usersCliques) {
+        this.usersCliques = usersCliques;
+    }
+
+    public Clique getCurrentlySelectedClique() {
+        return currentlySelectedClique;
+    }
+
+    public void setCurrentlySelectedClique(Clique currentlySelectedClique) {
+        this.currentlySelectedClique = currentlySelectedClique;
+    }
 }

@@ -10,8 +10,8 @@ public class Clique {
     private String creator;
     private String description;
 
-    public Clique(String pName, String pCreator, String pDesc) {
-        this.id = 0;
+    public Clique(int pId, String pName, String pCreator, String pDesc) {
+        this.id = pId;
         this.name = pName;
         this.creator = pCreator;
         this.description = pDesc;
