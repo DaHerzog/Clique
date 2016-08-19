@@ -1,11 +1,14 @@
 package de.hsos.mad.clique.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import de.hsos.mad.clique.R;
+import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.EventsController;
 
 public class ShowEventDetails extends AppCompatActivity {
@@ -47,6 +50,14 @@ public class ShowEventDetails extends AppCompatActivity {
     }
 
     public void showEventLocation(View view) {
+        String eventStreet = EventsController.getInstance().getCurrentlySelectedEvent().getEventStreet();
+        String eventStreetNr = String.valueOf(EventsController.getInstance().getCurrentlySelectedEvent().getEventStreetNumber());
+        String eventZip = String.valueOf(EventsController.getInstance().getCurrentlySelectedEvent().getEventZip());
+        String eventCity = EventsController.getInstance().getCurrentlySelectedEvent().getEventCity();
 
+        Uri locationUri = Uri.parse("geo:0,0?q="+eventStreet+" "+eventStreetNr+", "+eventZip+" "+eventCity);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, locationUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }
