@@ -1,7 +1,6 @@
 package de.hsos.mad.clique.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,8 +44,8 @@ public class OpenEventsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_show_events, container, false);
-        RecyclerView eventsList = (RecyclerView)rootView.findViewById(R.id.events_recycler_view);
+        View rootView = inflater.inflate(R.layout.fragment_show_open_events, container, false);
+        RecyclerView eventsList = (RecyclerView)rootView.findViewById(R.id.events_open_recycler_view);
         LinearLayoutManager myLlm = new LinearLayoutManager(rootView.getContext());
         myLlm.setOrientation(LinearLayoutManager.VERTICAL);
         eventsList.setLayoutManager(myLlm);
@@ -62,4 +61,18 @@ public class OpenEventsFragment extends Fragment{
     public void setEventsAdapter(EventsAdapter eventsAdapter) {
         this.eventsAdapter = eventsAdapter;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(this.getView() != null) {
+            RecyclerView eventsList = (RecyclerView) this.getView().findViewById(R.id.events_open_recycler_view);
+            LinearLayoutManager myLlm = new LinearLayoutManager(this.getView().getContext());
+            myLlm.setOrientation(LinearLayoutManager.VERTICAL);
+            eventsList.setLayoutManager(myLlm);
+            EventsAdapter openAdapter = new EventsAdapter(EventsController.getInstance().getOpenEventsAsArray());
+            eventsList.setAdapter(openAdapter);
+        }
+    }
+
 }

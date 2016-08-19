@@ -18,4 +18,24 @@
     <string name="new_clique_caption_one">Wie soll deine Clique heißen?</string>
     <string name="new_clique_caption_two">Gebe eine kurze Beschreibung an!</string>
     <string name="new_clique_button">Erstellen</string>
+    <string name="event_detail_streetLbl">Straße:</string>
+    <string name="event_detail_streetNbrLbl">Hausnummer:</string>
+    <string name="event_detail_cityLbl">Ort:</string>
+    <string name="event_detail_descLbl">Beschreibung:</string>
+    <string name="event_detail_button_acceptLbl">Zusagen</string>
+    <string name="event_detail_button_cancelLbl">Absagen</string>
+    <string name="event_detail_button_showLocationLbl">Karte</string>
+    <string name="event_new_streetLbl">Straße:</string>
+    <string name="event_new_streetNbrLbl">Hausnummer:</string>
+    <string name="event_new_cityLbl">Ort:</string>
+    <string name="event_new_descLbl">Beschreibung:</string>
+    <string name="new_event_name_hint">Name</string>
+    <string name="new_event_street_hint">Straße</string>
+    <string name="new_event_streetNr_hint">Nr.</string>
+    <string name="new_event_zip_hint">PLZ</string>
+    <string name="new_event_city_hint">Stadt</string>
+    <string name="new_event_desc_hint">Beschreibung</string>
+    <string name="new_event_date_hint">Datum</string>
+    <string name="new_event_button_lbl">Erstellen</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

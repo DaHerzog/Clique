@@ -1,10 +1,10 @@
 package de.hsos.mad.clique.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +44,8 @@ public class CanceledEventsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_show_events, container, false);
-        RecyclerView eventsList = (RecyclerView)rootView.findViewById(R.id.events_recycler_view);
+        View rootView = inflater.inflate(R.layout.fragment_show_canceled_events, container, false);
+        RecyclerView eventsList = (RecyclerView)rootView.findViewById(R.id.events_canceled_recycler_view);
         LinearLayoutManager myLlm = new LinearLayoutManager(rootView.getContext());
         myLlm.setOrientation(LinearLayoutManager.VERTICAL);
         eventsList.setLayoutManager(myLlm);
@@ -61,5 +61,18 @@ public class CanceledEventsFragment extends Fragment{
 
     public void setEventsAdapter(EventsAdapter eventsAdapter) {
         this.eventsAdapter = eventsAdapter;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (this.getView() != null) {
+            RecyclerView eventsList = (RecyclerView) this.getView().findViewById(R.id.events_canceled_recycler_view);
+            LinearLayoutManager myLlm = new LinearLayoutManager(this.getView().getContext());
+            myLlm.setOrientation(LinearLayoutManager.VERTICAL);
+            eventsList.setLayoutManager(myLlm);
+            EventsAdapter canceledAdapter = new EventsAdapter(EventsController.getInstance().getCanceledEventsAsArray());
+            eventsList.setAdapter(canceledAdapter);
+        }
     }
 }

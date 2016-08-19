@@ -1,5 +1,6 @@
 package de.hsos.mad.clique.activities;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -14,14 +15,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+
 import android.util.Log;
-import android.util.StringBuilderPrinter;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,14 +73,32 @@ public class ShowEventsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(view.getContext(), CreateNewEventActivity.class));
             }
         });
 
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        for (int i = 0; i < this.mSectionsPagerAdapter.getCount(); i++) {
+            if (this.mSectionsPagerAdapter.getItem(i) instanceof AcceptedEventsFragment) {
+                AcceptedEventsFragment acFrag = (AcceptedEventsFragment) this.mSectionsPagerAdapter.getItem(i);
+                //acFrag.refreshData();
+
+            }
+            if (this.mSectionsPagerAdapter.getItem(i) instanceof CanceledEventsFragment) {
+                CanceledEventsFragment canFrag = (CanceledEventsFragment)this.mSectionsPagerAdapter.getItem(i);
+                //canFrag.refreshData();
+            }
+            if (this.mSectionsPagerAdapter.getItem(i) instanceof OpenEventsFragment) {
+                OpenEventsFragment opFrag = (OpenEventsFragment)this.mSectionsPagerAdapter.getItem(i);
+                //opFrag.refreshData();
+            }
+        }
+    }
 
 
 

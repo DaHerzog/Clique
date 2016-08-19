@@ -36,6 +36,9 @@
         <activity
             android:name=".activities.CreateNewClique"
             android:label="Neue Clique" />
+        <activity android:name=".activities.ShowEventDetails" />
+        <activity android:name=".activities.CreateNewEventActivity"
+            android:label="Neues Event"/>
     </application>
 
 </manifest>

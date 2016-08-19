@@ -66,6 +66,42 @@ public class EventsController {
         return returnArray;
     }
 
+    public void acceptSelectedEvent() {
+        this.currentlySelectedEvent.setAccepted(true);
+        this.currentlySelectedEvent.setCanceled(false);
+        if (this.openEvents.contains(this.currentlySelectedEvent)) {
+            this.openEvents.remove(this.currentlySelectedEvent);
+            this.acceptedEvents.add(this.currentlySelectedEvent);
+        }
+        if (this.canceledEvents.contains(this.currentlySelectedEvent)) {
+            this.canceledEvents.remove(this.currentlySelectedEvent);
+            this.acceptedEvents.add(this.currentlySelectedEvent);
+        }
+    }
+
+    public void cancelSelectedEvent() {
+        this.currentlySelectedEvent.setAccepted(false);
+        this.currentlySelectedEvent.setCanceled(true);
+        if (this.openEvents.contains(this.currentlySelectedEvent)) {
+            this.openEvents.remove(this.currentlySelectedEvent);
+            this.canceledEvents.add(this.currentlySelectedEvent);
+        }
+        if (this.acceptedEvents.contains(this.currentlySelectedEvent)) {
+            this.acceptedEvents.remove(this.currentlySelectedEvent);
+            this.canceledEvents.add(this.currentlySelectedEvent);
+        }
+    }
+
+    public void createNewEvent(int eCliqueId, String eName, String eStreet, int eStreetNr, int eZip,
+                               String eCity, String eDesc, String eDate) {
+        EventsRepository.getInstance().createNewEvent(eCliqueId, eName, eStreet, eStreetNr, eZip,
+            eCity, eDesc, eDate);
+    }
+
+    public void addOpenEvent(Event addEvent) {
+        this.openEvents.add(addEvent);
+    }
+
     public List<Event> getOpenEvents() {
         return openEvents;
     }

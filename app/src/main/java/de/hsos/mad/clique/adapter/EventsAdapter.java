@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.hsos.mad.clique.R;
+import de.hsos.mad.clique.activities.ShowEventDetails;
 import de.hsos.mad.clique.activities.ShowEventsActivity;
 import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.EventsController;
@@ -46,6 +47,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         public void onClick(View v) {
             //Generate intent for "show detailed Event" - activity
             EventsController.getInstance().setCurrentlySelectedEvent(this.event);
+            v.getContext().startActivity(new Intent(v.getContext(), ShowEventDetails.class));
 
         }
 
@@ -79,4 +81,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         return events.length;
     }
 
+    public Event[] getEvents() {
+        return events;
+    }
+
+    public void setEvents(Event[] events) {
+        this.events = events;
+    }
 }
