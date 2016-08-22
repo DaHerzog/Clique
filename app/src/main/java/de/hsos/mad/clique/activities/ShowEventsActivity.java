@@ -1,5 +1,6 @@
 package de.hsos.mad.clique.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -32,6 +33,7 @@ import de.hsos.mad.clique.controller.EventsController;
 import de.hsos.mad.clique.fragments.AcceptedEventsFragment;
 import de.hsos.mad.clique.fragments.CanceledEventsFragment;
 import de.hsos.mad.clique.fragments.OpenEventsFragment;
+import de.hsos.mad.clique.interfaces.MyViewHolderCallbackInterface;
 
 public class ShowEventsActivity extends AppCompatActivity {
 
@@ -100,8 +102,6 @@ public class ShowEventsActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -124,6 +124,13 @@ public class ShowEventsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        EventsController.getInstance().getAcceptedEvents().clear();
+        EventsController.getInstance().getCanceledEvents().clear();
+        EventsController.getInstance().getOpenEvents().clear();
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

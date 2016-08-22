@@ -9,10 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.hsos.mad.clique.R;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
 import de.hsos.mad.clique.models.User;
 import de.hsos.mad.clique.repositories.UserRepository;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements MyCallbackInterface{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
             String eMailString = email.getText().toString();
             String passwordString = password.getText().toString();
             User newUser = new User(userName, eMailString);
-            if (UserRepository.getInstance().createNewUser(newUser, passwordString, this.getApplicationContext())) {
+            if (UserRepository.getInstance().createNewUser(newUser, passwordString, this)) {
                 Toast.makeText(this.getApplicationContext(), "Erfolgreich registriert",
                         Toast.LENGTH_SHORT).show();
-                finish();
             }
         } else {
             Toast.makeText(this.getApplicationContext(), "Passwörter stimmen nicht überein",
@@ -48,5 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void backToLoginFromRegistration(View view) {
         startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    public void dataReady() {
+        finish();
     }
 }

@@ -1,5 +1,7 @@
 package de.hsos.mad.clique.controller;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,6 @@ public class EventsController {
         this.openEvents = new ArrayList<Event>();
         this.acceptedEvents = new ArrayList<Event>();
         this.canceledEvents = new ArrayList<Event>();
-        this.populateLists();
     }
 
     public static EventsController getInstance() {
@@ -33,19 +34,18 @@ public class EventsController {
         return instance;
     }
 
-    public void populateLists() {
-        ArrayList<Event> allEvents = EventsRepository.getInstance().getEventsPerUserAndClique();
-        for (Event currEvent : allEvents) {
-            if (currEvent.isOpen()) {
-                this.openEvents.add(currEvent);
-            }
-            if (currEvent.isAccepted()) {
-                this.acceptedEvents.add(currEvent);
-            }
-            if (currEvent.isCanceled()) {
-                this.canceledEvents.add(currEvent);
-            }
+    public void populateLists(Event event) {
+
+        if (event.isOpen()) {
+            this.openEvents.add(event);
         }
+        if (event.isAccepted()) {
+            this.acceptedEvents.add(event);
+        }
+        if (event.isCanceled()) {
+            this.canceledEvents.add(event);
+        }
+
     }
 
     public Event[] getOpenEventsAsArray() {
@@ -92,10 +92,10 @@ public class EventsController {
         }
     }
 
-    public void createNewEvent(int eCliqueId, String eName, String eStreet, int eStreetNr, int eZip,
-                               String eCity, String eDesc, String eDate) {
+    public void createNewEvent(long eCliqueId, String eName, String eStreet, int eStreetNr, int eZip,
+                               String eCity, String eDesc, String eDate, Context appCtx) {
         EventsRepository.getInstance().createNewEvent(eCliqueId, eName, eStreet, eStreetNr, eZip,
-            eCity, eDesc, eDate);
+            eCity, eDesc, eDate, appCtx);
     }
 
     public void addOpenEvent(Event addEvent) {

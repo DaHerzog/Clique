@@ -1,5 +1,8 @@
 package de.hsos.mad.clique.controller;
 
+import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hsos.mad.clique.models.Clique;
@@ -18,7 +21,7 @@ public class CliquenController {
     private Clique currentlySelectedClique;
 
     private CliquenController() {
-
+        this.usersCliques = new ArrayList<Clique>();
     }
 
     public static CliquenController getInstance() {
@@ -28,12 +31,13 @@ public class CliquenController {
         return instance;
     }
 
-    public Clique[] getCliquesPerUser(User pUser) {
-        return CliquenRepository.getInstance().getCliquesForUserId(pUser.getId());
+    public Clique[] getCliquesPerUser() {
+        Clique[] returnedCliques = new Clique[this.usersCliques.size()];
+        return this.usersCliques.toArray(returnedCliques);
     }
 
-    public void addNewClique(String name, String description) {
-        CliquenRepository.getInstance().addNewClique(name, description);
+    public void addNewClique(String name, Context appCtx) {
+        CliquenRepository.getInstance().addNewClique(name, appCtx);
     }
 
     public List<Clique> getUsersCliques() {
@@ -51,4 +55,6 @@ public class CliquenController {
     public void setCurrentlySelectedClique(Clique currentlySelectedClique) {
         this.currentlySelectedClique = currentlySelectedClique;
     }
+
+
 }

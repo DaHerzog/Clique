@@ -1,6 +1,9 @@
 package de.hsos.mad.clique.controller;
 
+import android.content.Context;
+
 import de.hsos.mad.clique.models.User;
+import de.hsos.mad.clique.repositories.UserRepository;
 
 /**
  * Created by davidherzog on 06.08.16.
@@ -20,6 +23,11 @@ public class UserController {
             instance = new UserController();
         }
         return instance;
+    }
+
+    public void login(String email, String password, Context appCtx) {
+        CliquenController.getInstance().getUsersCliques().clear();
+        UserRepository.getInstance().login(email, password, appCtx);
     }
 
     public User getActualUser() {

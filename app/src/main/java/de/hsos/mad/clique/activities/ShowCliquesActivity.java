@@ -1,5 +1,6 @@
 package de.hsos.mad.clique.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,9 +21,12 @@ import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.adapter.CliquesAdapter;
 import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.UserController;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
+import de.hsos.mad.clique.interfaces.MyViewHolderCallbackInterface;
 import de.hsos.mad.clique.repositories.CliquenRepository;
+import de.hsos.mad.clique.repositories.UserRepository;
 
-public class ShowCliquesActivity extends AppCompatActivity {
+public class ShowCliquesActivity extends AppCompatActivity implements MyCallbackInterface{
 
     static final int CREATE_CLIQUE_REQUEST = 1;
 
@@ -41,7 +45,8 @@ public class ShowCliquesActivity extends AppCompatActivity {
         myLlm.setOrientation(LinearLayoutManager.VERTICAL);
         cliqueList.setLayoutManager(myLlm);
         //set the adapter
-        this.cliquesAdapter = new CliquesAdapter();
+        this.cliquesAdapter = new CliquesAdapter(CliquenController.getInstance()
+                .getCliquesPerUser());
         cliqueList.setAdapter(this.cliquesAdapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,9 +67,6 @@ public class ShowCliquesActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CREATE_CLIQUE_REQUEST) {
             if (resultCode == RESULT_OK) {
-                String cliqueName = data.getStringExtra("clique_name");
-                String cliqueDescription = data.getStringExtra("clique_description");
-                CliquenController.getInstance().addNewClique(cliqueName, cliqueDescription);
                 this.cliquesAdapter.getActualCliques();
                 this.cliquesAdapter.notifyDataSetChanged();
             } else if (resultCode == RESULT_CANCELED) {
@@ -72,4 +74,29 @@ public class ShowCliquesActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        UserController.getInstance().setActualUser(null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (this.cliquesAdapter != null) {
+            this.cliquesAdapter.getActualCliques();
+            this.cliquesAdapter.notifyDataSetChanged();
+        } else {
+            Log.w("DEBUG", "is null..-.-");
+        }
+    }
+
+    @Override
+    public void dataReady() {
+        Intent goToEvents = new Intent(this, ShowEventsActivity.class);
+        startActivity(goToEvents);
+    }
 }
+
+

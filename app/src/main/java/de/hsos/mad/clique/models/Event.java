@@ -5,8 +5,8 @@ package de.hsos.mad.clique.models;
  */
 public class Event {
 
-    private int id;
-    private int cliqueId;
+    private long id;
+    private long cliqueId;
     private String eventName;
     private String eventStreet;
     private int eventStreetNumber;
@@ -18,7 +18,7 @@ public class Event {
     private boolean accepted;
     private boolean canceled;
 
-    public Event(int pId, int pCliqueId, String pEventName, String pEventStreet, int pEventStreetNumber, int pEventZip, String pEventCity,
+    public Event(long pId, long pCliqueId, String pEventName, String pEventStreet, int pEventStreetNumber, int pEventZip, String pEventCity,
                     String pEventDescription, String pEventDate, boolean pOpen, boolean pAccepted, boolean pCanceled) {
         this.id = pId;
         this.cliqueId = pCliqueId;
@@ -34,19 +34,19 @@ public class Event {
         this.canceled = pCanceled;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getCliqueId() {
+    public long getCliqueId() {
         return cliqueId;
     }
 
-    public void setCliqueId(int cliqueId) {
+    public void setCliqueId(long cliqueId) {
         this.cliqueId = cliqueId;
     }
 

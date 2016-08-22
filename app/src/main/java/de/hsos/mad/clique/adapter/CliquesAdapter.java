@@ -1,5 +1,6 @@
 package de.hsos.mad.clique.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +13,12 @@ import android.widget.TextView;
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.activities.ShowEventsActivity;
 import de.hsos.mad.clique.controller.CliquenController;
+import de.hsos.mad.clique.controller.EventsController;
 import de.hsos.mad.clique.controller.UserController;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
+import de.hsos.mad.clique.interfaces.MyViewHolderCallbackInterface;
 import de.hsos.mad.clique.models.Clique;
+import de.hsos.mad.clique.repositories.EventsRepository;
 
 
 /**
@@ -21,7 +26,7 @@ import de.hsos.mad.clique.models.Clique;
  */
 public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHolder> {
 
-    private Clique[] mUsersCliques = CliquenController.getInstance().getCliquesPerUser(UserController.getInstance().getActualUser());
+    private Clique[] mUsersCliques;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected TextView mCliqueName;
@@ -45,9 +50,8 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
 
         @Override
         public void onClick(View v) {
-            Intent goToEvents = new Intent(v.getContext(), ShowEventsActivity.class);
             CliquenController.getInstance().setCurrentlySelectedClique(this.clique);
-            v.getContext().startActivity(goToEvents);
+            EventsRepository.getInstance().getEventsPerUserAndClique(v.getContext());
         }
 
     }
@@ -89,6 +93,6 @@ public class CliquesAdapter extends RecyclerView.Adapter<CliquesAdapter.ViewHold
     }
 
     public void getActualCliques() {
-        this.mUsersCliques = CliquenController.getInstance().getCliquesPerUser(UserController.getInstance().getActualUser());
+        this.mUsersCliques = CliquenController.getInstance().getCliquesPerUser();
     }
 }

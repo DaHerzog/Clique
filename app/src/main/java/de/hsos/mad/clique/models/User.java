@@ -5,7 +5,7 @@ package de.hsos.mad.clique.models;
  */
 public class User {
 
-    int id;
+    long id;
     String mName;
     String eMail;
 
@@ -14,8 +14,12 @@ public class User {
         this.eMail = pEmail;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getmName() {

@@ -1,8 +1,30 @@
 package de.hsos.mad.clique.repositories;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import de.hsos.mad.clique.activities.CreateNewEventActivity;
+import de.hsos.mad.clique.activities.LoginActivity;
+import de.hsos.mad.clique.activities.ShowCliquesActivity;
+import de.hsos.mad.clique.adapter.CliquesAdapter;
+import de.hsos.mad.clique.communication.MyRequestQueue;
+import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.EventsController;
+import de.hsos.mad.clique.controller.UserController;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
+import de.hsos.mad.clique.models.Clique;
 import de.hsos.mad.clique.models.Event;
 
 /**
@@ -11,11 +33,10 @@ import de.hsos.mad.clique.models.Event;
 public class EventsRepository {
 
     private static EventsRepository instance = null;
-
-    private ArrayList<Event> mockedEvents;
+    private static final String EVENTS_JSON_URL = "http://10.0.2.2:8080/cliqueServer/rest/events/";
 
     private EventsRepository() {
-        this.mockedEvents = new ArrayList<>();
+
     }
 
     public static synchronized EventsRepository getInstance() {
@@ -25,29 +46,91 @@ public class EventsRepository {
         return instance;
     }
 
-    public ArrayList<Event> getEventsPerUserAndClique() {
+    public void getEventsPerUserAndClique(final Context appCtx) {
         //Get the User and Clique ID per actual... variable in corresponding controller
-
-        Event event1 = new Event(1, 10, "Grillen", "Neuenkampsweg", 24, 26169, "Friesoythe", "Gemuetliches Grillen", "22.08.2016", true, false, false);
-        Event event2 = new Event(2, 10, "Feiern", "Neuenkampsweg", 24, 26169, "Friesoythe", "Gemuetliches Grillen", "22.08.2016", false, true, false);
-        Event event3 = new Event(3, 10, "Chillen", "Neuenkampsweg", 24, 26169, "Friesoythe", "Gemuetliches Grillen", "22.08.2016", false, false, true);
-        Event event4 = new Event(4, 10, "Kekse backen", "Neuenkampsweg", 24, 26169, "Friesoythe", "Gemuetliches Grillen", "22.08.2016", true, false, false);
-        Event event5 = new Event(5, 10, "Reis kochen", "Neuenkampsweg", 24, 26169, "Friesoythe", "Gemuetliches Grillen", "22.08.2016", false, false, true);
-
-        mockedEvents.add(event1);
-        mockedEvents.add(event2);
-        mockedEvents.add(event3);
-        mockedEvents.add(event4);
-        mockedEvents.add(event5);
-
-        return this.mockedEvents;
+        String userId = String.valueOf(UserController.getInstance().getActualUser().getId());
+        String cliqueId = String.valueOf(CliquenController.getInstance().getCurrentlySelectedClique().getId());
+        String url = EVENTS_JSON_URL+"get/"+userId+"/"+cliqueId;
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject tmpJsonObj = response.getJSONObject(i);
+                        long id = tmpJsonObj.getLong("id");
+                        long cliqId = tmpJsonObj.getLong("cliqueId");
+                        String eventName = tmpJsonObj.getString("eventName");
+                        String eventStreet = tmpJsonObj.getString("eventStreet");
+                        int eventStreetNumber = tmpJsonObj.getInt("eventStreetnumber");
+                        int eventZip = tmpJsonObj.getInt("eventZip");
+                        String eventCity = tmpJsonObj.getString("eventCity");
+                        String eventDescription = tmpJsonObj.getString("eventDescription");
+                        String eventDate = tmpJsonObj.getString("eventDate");
+                        boolean open = tmpJsonObj.getBoolean("open");
+                        boolean accepted = tmpJsonObj.getBoolean("accepted");
+                        boolean canceled = tmpJsonObj.getBoolean("canceled");
+                        Event newEvent = new Event(id, cliqId, eventName, eventStreet,
+                                eventStreetNumber, eventZip, eventCity, eventDescription, eventDate,
+                                open, accepted, canceled);
+                        EventsController.getInstance().populateLists(newEvent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (appCtx instanceof ShowCliquesActivity) {
+                    ((MyCallbackInterface) appCtx).dataReady();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.w("DEBUG", "Fehler bei der Übertragung?");
+                Log.w("DEBUG", error.toString());
+            }
+        });
+        MyRequestQueue.getInstance(appCtx).addToRequestQueue(jsonArrayRequest);
     }
 
-    public void createNewEvent(int eCliqueId, String eName, String eStreet, int eStreetNr, int eZip,
-                               String eCity, String eDesc, String eDate) {
+    public void createNewEvent(long eCliqueId, String eName, String eStreet, int eStreetNr, int eZip,
+                               String eCity, String eDesc, String eDate, final Context appCtx) {
         //Restful aufruf mit den parametern und so...
-        Event newEvent = new Event(this.mockedEvents.size(), eCliqueId,eName, eStreet, eStreetNr,
-                eZip, eCity, eDesc, eDate, true, false, false);
-        EventsController.getInstance().addOpenEvent(newEvent);
+        String url = EVENTS_JSON_URL+"create/"+String.valueOf(eCliqueId)+"/"+eName+"/"+
+                eStreet+"+"+eStreetNr+"/"+eZip+"/"+eCity+"/"+eDesc+"/"+eDate;
+        JsonObjectRequest theRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            long id = response.getLong("id");
+                            long cliqId = response.getLong("cliqueId");
+                            String eventName = response.getString("eventName");
+                            String eventStreet = response.getString("eventStreet");
+                            int eventStreetNumber = response.getInt("eventStreetnumber");
+                            int eventZip = response.getInt("eventZip");
+                            String eventCity = response.getString("eventCity");
+                            String eventDescription = response.getString("eventDescription");
+                            String eventDate = response.getString("eventDate");
+                            boolean open = response.getBoolean("open");
+                            boolean accepted = response.getBoolean("accepted");
+                            boolean canceled = response.getBoolean("canceled");
+                            Event newEvent = new Event(id, cliqId, eventName, eventStreet,
+                                    eventStreetNumber, eventZip, eventCity, eventDescription,
+                                    eventDate, open, accepted, canceled);
+                            EventsController.getInstance().addOpenEvent(newEvent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (appCtx instanceof CreateNewEventActivity) {
+                            ((MyCallbackInterface) appCtx).dataReady();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w("DEBUG", "Fehler bei der Übertragung: ");
+                        Log.w("DEBUG", error.toString());
+                    }
+                });
+        MyRequestQueue.getInstance(appCtx).addToRequestQueue(theRequest);
     }
 }

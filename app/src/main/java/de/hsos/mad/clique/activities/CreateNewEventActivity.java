@@ -9,8 +9,9 @@ import android.widget.TextView;
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.EventsController;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
 
-public class CreateNewEventActivity extends AppCompatActivity {
+public class CreateNewEventActivity extends AppCompatActivity implements MyCallbackInterface{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class CreateNewEventActivity extends AppCompatActivity {
         TextView eventCity = (TextView)findViewById(R.id.new_event_city);
         TextView eventDesc = (TextView)findViewById(R.id.new_event_desc);
 
-        int eventCliqueId = CliquenController.getInstance().getCurrentlySelectedClique().getId();
+        long eventCliqueId = CliquenController.getInstance().getCurrentlySelectedClique().getId();
         String eventNameString = eventName.getText().toString();
         String eventDateString = eventDate.getText().toString();
         String eventStreetString = eventStreet.getText().toString();
@@ -38,8 +39,12 @@ public class CreateNewEventActivity extends AppCompatActivity {
 
         EventsController.getInstance().createNewEvent(eventCliqueId,eventNameString,
                 eventStreetString, eventStreetNrInt, eventZipInt, eventCityString, eventDescString,
-                eventDateString);
+                eventDateString, this);
 
+    }
+
+    @Override
+    public void dataReady() {
         finish();
     }
 }

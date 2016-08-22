@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import de.hsos.mad.clique.R;
+import de.hsos.mad.clique.controller.CliquenController;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
 
-public class CreateNewClique extends AppCompatActivity {
+public class CreateNewClique extends AppCompatActivity implements MyCallbackInterface{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +25,17 @@ public class CreateNewClique extends AppCompatActivity {
         String cliqueName = cliqueNameView.getText().toString();
         String cliqueDesc = cliqueDescView.getText().toString();
 
-        if (!cliqueName.isEmpty() && !cliqueDesc.isEmpty()) {
+        if (!cliqueName.isEmpty()) {
             Intent result = new Intent();
             result.putExtra("clique_name", cliqueName);
             result.putExtra("clique_description", cliqueDesc);
+            CliquenController.getInstance().addNewClique(cliqueName, this);
             setResult(RESULT_OK, result);
-            finish();
         }
+    }
+
+    @Override
+    public void dataReady() {
+        finish();
     }
 }

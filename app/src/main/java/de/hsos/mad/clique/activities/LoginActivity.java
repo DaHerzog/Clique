@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.controller.UserController;
+import de.hsos.mad.clique.interfaces.MyCallbackInterface;
 import de.hsos.mad.clique.models.User;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements MyCallbackInterface{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void navigateToShowCliquesActivity(View view) {
-        //First check if the user has permissions to use this app @DB...
-        UserController.getInstance().setActualUser(new User("Peter", "Mustermann"));
+        TextView email = (TextView)findViewById(R.id.loginEmail);
+        TextView pw = (TextView)findViewById(R.id.loginPassword);
+
+        UserController.getInstance().login(email.getText().toString(), pw.getText().toString(), this);
+    }
+
+    public void dataReady() {
         startActivity(new Intent(this, ShowCliquesActivity.class));
     }
 }
