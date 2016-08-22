@@ -7,12 +7,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import de.hsos.mad.clique.communication.GsonRequest;
 import de.hsos.mad.clique.communication.MyRequestQueue;
 import de.hsos.mad.clique.models.User;
 
@@ -22,7 +25,7 @@ import de.hsos.mad.clique.models.User;
 public class UserRepository {
 
     private static UserRepository instance = null;
-    private static final String USER_JSON_URL = "http://localhost:8080/cliqueServer/rest/users/";
+    private static final String USER_JSON_URL = "http://10.0.2.2:8080/cliqueServer/rest/users/";
 
     private UserRepository() {
 
@@ -40,6 +43,9 @@ public class UserRepository {
             String encodedNameParameter = URLEncoder.encode(newUser.getmName(), "UTF-8");
             String url = USER_JSON_URL+"new/"+newUser.geteMail()+"/"+encodedNameParameter+"/"+password;
             Log.w("DEBUG", url);
+
+
+
             JsonObjectRequest theRequest = new JsonObjectRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                         @Override
@@ -51,6 +57,7 @@ public class UserRepository {
                         public void onErrorResponse(VolleyError error) {
                             Log.w("DEBUG", "Fehler bei der Übertragung?");
                             Log.w("DEBUG", error.toString());
+                            Log.w("DEBUG", error.getMessage());
                         }
                     });
 

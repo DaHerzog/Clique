@@ -2,6 +2,7 @@ package de.hsos.mad.clique.communication;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -35,12 +36,14 @@ public class MyRequestQueue {
 
     private RequestQueue getRequestQueue() {
         if (theQueue == null) {
+
             theQueue = Volley.newRequestQueue(theContext.getApplicationContext(), new OkHttpStack(new OkHttpClient()));
         }
         return theQueue;
     }
 
     public <T> void addToRequestQueue(Request<T> req) {
+        Log.w("DEBUG","hier");
         getRequestQueue().add(req);
     }
 
