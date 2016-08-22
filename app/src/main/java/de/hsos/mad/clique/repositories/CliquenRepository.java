@@ -28,7 +28,7 @@ public class CliquenRepository {
         this.mockedCliques.add(new Clique(10, "Keksparty4", "peter", "wilder haufen"));
     }
 
-    public static CliquenRepository getInstance() {
+    public static synchronized CliquenRepository getInstance() {
         if (instance == null) {
             instance = new CliquenRepository();
         }

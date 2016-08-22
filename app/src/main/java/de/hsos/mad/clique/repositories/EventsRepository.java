@@ -18,7 +18,7 @@ public class EventsRepository {
         this.mockedEvents = new ArrayList<>();
     }
 
-    public static EventsRepository getInstance() {
+    public static synchronized EventsRepository getInstance() {
         if (instance == null) {
             instance = new EventsRepository();
         }

@@ -26,9 +26,9 @@ public class ShowEventDetails extends AppCompatActivity {
         TextView streetNumber = (TextView)findViewById(R.id.event_detail_streetNumber);
         streetNumber.setText(String.valueOf(EventsController.getInstance().getCurrentlySelectedEvent().getEventStreetNumber()));
         TextView zipAndCity = (TextView)findViewById(R.id.event_detail_city);
-        String zipAndCiyString = EventsController.getInstance().getCurrentlySelectedEvent().getEventZip() +
+        String zipAndCityString = EventsController.getInstance().getCurrentlySelectedEvent().getEventZip() +
                 " " + EventsController.getInstance().getCurrentlySelectedEvent().getEventCity();
-        zipAndCity.setText(zipAndCiyString);
+        zipAndCity.setText(zipAndCityString);
         TextView desc = (TextView)findViewById(R.id.event_detail_desc);
         desc.setText(EventsController.getInstance().getCurrentlySelectedEvent().getEventDescription());
     }

@@ -7,11 +7,11 @@ public class User {
 
     int id;
     String mName;
-    String mSurName;
+    String eMail;
 
-    public User(String pName, String pSurName) {
+    public User(String pName, String pEmail) {
         this.mName = pName;
-        this.mSurName = pSurName;
+        this.eMail = pEmail;
     }
 
     public int getId() {
@@ -26,11 +26,11 @@ public class User {
         this.mName = mName;
     }
 
-    public String getmSurName() {
-        return mSurName;
+    public String geteMail() {
+        return eMail;
     }
 
-    public void setmSurName(String mSurName) {
-        this.mSurName = mSurName;
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 }
