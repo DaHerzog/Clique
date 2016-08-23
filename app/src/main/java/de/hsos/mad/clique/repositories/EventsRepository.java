@@ -136,13 +136,19 @@ public class EventsRepository {
         String userId = String.valueOf(UserController.getInstance().getActualUser().getId());
         String eventId = String.valueOf(acEvent.getId());
 
-        String url = EVENTS_JSON_URL+userId+"/"+eventId+"/"+status;
+        String url = EVENTS_JSON_URL+"update/"+userId+"/"+eventId+"/"+status;
         JsonObjectRequest theRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(appCtx.getApplicationContext(), "Status geändert",
-                                Toast.LENGTH_SHORT).show();
+                        try {
+                            if (response.getBoolean("success")) {
+                                Toast.makeText(appCtx.getApplicationContext(), "Status geändert",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override

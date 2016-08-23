@@ -43,7 +43,6 @@ public class MyRequestQueue {
     }
 
     public <T> void addToRequestQueue(Request<T> req) {
-        Log.w("DEBUG","hier");
         getRequestQueue().add(req);
     }
 

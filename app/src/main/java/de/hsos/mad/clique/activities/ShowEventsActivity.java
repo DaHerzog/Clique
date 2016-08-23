@@ -82,31 +82,11 @@ public class ShowEventsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        for (int i = 0; i < this.mSectionsPagerAdapter.getCount(); i++) {
-            if (this.mSectionsPagerAdapter.getItem(i) instanceof AcceptedEventsFragment) {
-                AcceptedEventsFragment acFrag = (AcceptedEventsFragment) this.mSectionsPagerAdapter.getItem(i);
-                //acFrag.refreshData();
-
-            }
-            if (this.mSectionsPagerAdapter.getItem(i) instanceof CanceledEventsFragment) {
-                CanceledEventsFragment canFrag = (CanceledEventsFragment)this.mSectionsPagerAdapter.getItem(i);
-                //canFrag.refreshData();
-            }
-            if (this.mSectionsPagerAdapter.getItem(i) instanceof OpenEventsFragment) {
-                OpenEventsFragment opFrag = (OpenEventsFragment)this.mSectionsPagerAdapter.getItem(i);
-                //opFrag.refreshData();
-            }
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_events, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.menu_show_events, menu);
+        //return true;
+        return false;
     }
 
     @Override
