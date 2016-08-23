@@ -73,6 +73,8 @@ public class ShowEventsActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_show_events, menu);
         //return true;
+
+        //return false will disable the button
         return false;
     }
 
