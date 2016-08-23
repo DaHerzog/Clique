@@ -1,30 +1,20 @@
 package de.hsos.mad.clique.activities;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.adapter.CliquesAdapter;
 import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.UserController;
 import de.hsos.mad.clique.interfaces.MyCallbackInterface;
-import de.hsos.mad.clique.interfaces.MyViewHolderCallbackInterface;
-import de.hsos.mad.clique.repositories.CliquenRepository;
-import de.hsos.mad.clique.repositories.UserRepository;
 
 public class ShowCliquesActivity extends AppCompatActivity implements MyCallbackInterface{
 

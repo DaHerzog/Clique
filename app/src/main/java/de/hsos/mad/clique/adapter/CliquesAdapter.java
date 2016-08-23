@@ -1,22 +1,14 @@
 package de.hsos.mad.clique.adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import de.hsos.mad.clique.R;
-import de.hsos.mad.clique.activities.ShowEventsActivity;
 import de.hsos.mad.clique.controller.CliquenController;
-import de.hsos.mad.clique.controller.EventsController;
-import de.hsos.mad.clique.controller.UserController;
-import de.hsos.mad.clique.interfaces.MyCallbackInterface;
-import de.hsos.mad.clique.interfaces.MyViewHolderCallbackInterface;
 import de.hsos.mad.clique.models.Clique;
 import de.hsos.mad.clique.repositories.EventsRepository;
 
