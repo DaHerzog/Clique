@@ -1,6 +1,5 @@
 package de.hsos.mad.clique.repositories;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,8 +8,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,9 +15,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import de.hsos.mad.clique.activities.LoginActivity;
 import de.hsos.mad.clique.activities.RegisterActivity;
-import de.hsos.mad.clique.communication.GsonRequest;
 import de.hsos.mad.clique.communication.MyRequestQueue;
 import de.hsos.mad.clique.controller.UserController;
 import de.hsos.mad.clique.interfaces.MyCallbackInterface;
