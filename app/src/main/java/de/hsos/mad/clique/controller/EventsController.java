@@ -66,7 +66,7 @@ public class EventsController {
         return returnArray;
     }
 
-    public void acceptSelectedEvent() {
+    public void acceptSelectedEvent(Context appCtx) {
         this.currentlySelectedEvent.setAccepted(true);
         this.currentlySelectedEvent.setCanceled(false);
         if (this.openEvents.contains(this.currentlySelectedEvent)) {
@@ -77,9 +77,10 @@ public class EventsController {
             this.canceledEvents.remove(this.currentlySelectedEvent);
             this.acceptedEvents.add(this.currentlySelectedEvent);
         }
+        EventsRepository.getInstance().notifyServerChangedStatus(this.currentlySelectedEvent, appCtx, "true");
     }
 
-    public void cancelSelectedEvent() {
+    public void cancelSelectedEvent(Context appCtx) {
         this.currentlySelectedEvent.setAccepted(false);
         this.currentlySelectedEvent.setCanceled(true);
         if (this.openEvents.contains(this.currentlySelectedEvent)) {
@@ -90,6 +91,7 @@ public class EventsController {
             this.acceptedEvents.remove(this.currentlySelectedEvent);
             this.canceledEvents.add(this.currentlySelectedEvent);
         }
+        EventsRepository.getInstance().notifyServerChangedStatus(this.currentlySelectedEvent, appCtx, "false");
     }
 
     public void createNewEvent(long eCliqueId, String eName, String eStreet, int eStreetNr, int eZip,

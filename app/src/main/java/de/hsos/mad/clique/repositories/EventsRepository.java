@@ -2,6 +2,7 @@ package de.hsos.mad.clique.repositories;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,15 +17,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import de.hsos.mad.clique.activities.CreateNewEventActivity;
-import de.hsos.mad.clique.activities.LoginActivity;
 import de.hsos.mad.clique.activities.ShowCliquesActivity;
-import de.hsos.mad.clique.adapter.CliquesAdapter;
 import de.hsos.mad.clique.communication.MyRequestQueue;
 import de.hsos.mad.clique.controller.CliquenController;
 import de.hsos.mad.clique.controller.EventsController;
 import de.hsos.mad.clique.controller.UserController;
 import de.hsos.mad.clique.interfaces.MyCallbackInterface;
-import de.hsos.mad.clique.models.Clique;
 import de.hsos.mad.clique.models.Event;
 
 /**
@@ -133,4 +131,27 @@ public class EventsRepository {
                 });
         MyRequestQueue.getInstance(appCtx).addToRequestQueue(theRequest);
     }
+
+    public void notifyServerChangedStatus(Event acEvent, final Context appCtx, String status) {
+        String userId = String.valueOf(UserController.getInstance().getActualUser().getId());
+        String eventId = String.valueOf(acEvent.getId());
+
+        String url = EVENTS_JSON_URL+userId+"/"+eventId+"/"+status;
+        JsonObjectRequest theRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(appCtx.getApplicationContext(), "Status geändert",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w("DEBUG", "Fehler bei der Übertragung: ");
+                        Log.w("DEBUG", error.toString());
+                    }
+                });
+        MyRequestQueue.getInstance(appCtx).addToRequestQueue(theRequest);
+    }
+
 }

@@ -40,12 +40,12 @@ public class ShowEventDetails extends AppCompatActivity {
     }
 
     public void acceptEvent(View view) {
-        EventsController.getInstance().acceptSelectedEvent();
+        EventsController.getInstance().acceptSelectedEvent(this);
         finish();
     }
 
     public void cancelEvent(View view) {
-        EventsController.getInstance().cancelSelectedEvent();
+        EventsController.getInstance().cancelSelectedEvent(this);
         finish();
     }
 

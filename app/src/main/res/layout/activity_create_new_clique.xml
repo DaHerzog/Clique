@@ -26,31 +26,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_clique_caption_two"
-        android:id="@+id/new_clique_caption2"
-        android:layout_below="@+id/new_clique_input_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp" />
-
-    <EditText
-        android:inputType="textLongMessage"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/new_clique_input_desc"
-        android:layout_below="@+id/new_clique_caption2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_clique_button"
         android:id="@+id/button"
-        android:layout_below="@+id/new_clique_input_desc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="69dp"
-        android:onClick="createCliqueAndReturn"/>
+        android:onClick="createCliqueAndReturn"
+        android:layout_below="@+id/new_clique_input_name" />
 </RelativeLayout>

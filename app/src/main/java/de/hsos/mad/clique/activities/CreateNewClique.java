@@ -20,15 +20,12 @@ public class CreateNewClique extends AppCompatActivity implements MyCallbackInte
 
     public void createCliqueAndReturn(View view) {
         TextView cliqueNameView = (TextView) findViewById(R.id.new_clique_input_name);
-        TextView cliqueDescView = (TextView) findViewById(R.id.new_clique_input_desc);
 
         String cliqueName = cliqueNameView.getText().toString();
-        String cliqueDesc = cliqueDescView.getText().toString();
 
         if (!cliqueName.isEmpty()) {
             Intent result = new Intent();
             result.putExtra("clique_name", cliqueName);
-            result.putExtra("clique_description", cliqueDesc);
             CliquenController.getInstance().addNewClique(cliqueName, this);
             setResult(RESULT_OK, result);
         }
