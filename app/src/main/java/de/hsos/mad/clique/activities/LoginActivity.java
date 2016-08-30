@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hsos.mad.clique.R;
 import de.hsos.mad.clique.controller.UserController;
@@ -26,8 +27,12 @@ public class LoginActivity extends AppCompatActivity implements MyCallbackInterf
     public void navigateToShowCliquesActivity(View view) {
         TextView email = (TextView)findViewById(R.id.loginEmail);
         TextView pw = (TextView)findViewById(R.id.loginPassword);
-
-        UserController.getInstance().login(email.getText().toString(), pw.getText().toString(), this);
+        if (!email.getText().toString().isEmpty() && !pw.getText().toString().isEmpty()) {
+            UserController.getInstance().login(email.getText().toString(), pw.getText().toString(), this);
+        } else {
+            Toast.makeText(this.getApplicationContext(), "Unvollständige Eingabe..",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void dataReady() {
